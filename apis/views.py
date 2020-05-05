@@ -5,7 +5,7 @@ from django.views import View
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.core.validators import validate_email, ValidationError
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 # 03. API - 01. Base API View 만들기
@@ -68,3 +68,10 @@ class UserLoginView(BaseView):
         login(request, user)
 
         return self.response
+
+
+# 07. API - 06. 유저 로그아웃 API
+class UserLogoutView(BaseView):
+    def get(self, request):
+        logout(request)
+        return self.response()
