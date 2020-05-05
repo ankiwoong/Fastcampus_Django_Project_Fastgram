@@ -1,7 +1,7 @@
-{% extends "_base.html" %}
+{% extends '_base.html' %}
 
 {% block body %}
-<h1>로그인</h1>
+<h1>로그인 페이지</h1>
 {{ request.user }}
 <input type="text" id="username">
 <input type="password" id="password">
@@ -12,10 +12,12 @@
 
 <script>
     $(document).ready(function () {
-        $('#logout').click(function () {
-            $.get('/apis/v1/users/logout/', {}, function () {
+        $('#login').click(function () {
+            $.post('/apis/v1/users/login/', { 'username': $('#username').val(), 'password': $('#password').val() }, function () {
                 location.reload();
-            })
+            }).fail(function (data) {
+                alert(data.responseJSON.message);
+            });
         });
     });
 </script>

@@ -124,3 +124,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = '/login/'           # 08. API - 07. 로그인 페이지 분리
