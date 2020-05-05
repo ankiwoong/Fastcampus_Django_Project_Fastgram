@@ -25,9 +25,22 @@ class UserCreateView(Baseview):
 
     def post(self, request):
         username = request.POST.get('username', '')
-        password = request.POST.get('password', '')
-        email = request.POST.get('email', '')
+        # 05. API - 03. 예외처리와 아이디, 이메일 등 검증하는 로직 만들기
+        if not username:
+            return self.response(message='아이디를 입력해주세요.', status=400)
 
-        user = User.objects.create_user(username, email, password)
+        password = request.POST.get('password', '')
+        if not password:
+            return self.response(message='패스워드를 입력해주세요.', status=400)
+
+        email = request.POST.get('email', '')
+        if not email:
+            return self.response(message='올바른 이메일을 입력해주세요.', status=400)
+
+        # 05. API - 03. 예외처리와 아이디, 이메일 등 검증하는 로직 만들기
+        try:
+            user = User.objects.create_user(username, email, password)
+        except IntIegrityError:
+            return self.response(message='이미 존재하는 아이디입니다.', status=400)
 
         return self.response({'user.id': user.id})
