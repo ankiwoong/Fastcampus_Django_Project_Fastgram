@@ -3,8 +3,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
 from django.contrib.auth.models import User
-from django.db import IntIegrityError
-from django.core.validators import validate_email, validationError
+from django.db import IntegrityError
+from django.core.validators import validate_email, ValidationError
 from django.contrib.auth import authenticate, login
 
 
@@ -20,7 +20,7 @@ class BaseView(View):
 
 
 # 04. API - 02. User API 만들기
-class UserCreateView(Baseview):
+class UserCreateView(BaseView):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super(UserCreateView, self).dispatch(request, *args, **kwargs)
@@ -37,10 +37,10 @@ class UserCreateView(Baseview):
 
         # 06. API - 04. 유저 로그인 API
         email = request.POST.get('email', '')
-           try:
-                validate_email(email)
-            except ValidationError:
-                self.response(message='올바른 이메일을 입력해주세요.', status=400)
+        try:
+            validate_email(email)
+        except ValidationError:
+            self.response(message='올바른 이메일을 입력해주세요.', status=400)
 
         # 05. API - 03. 예외처리와 아이디, 이메일 등 검증하는 로직 만들기
         try:

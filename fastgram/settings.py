@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     'apis',                        # 03. API - 01. Base API View 만들기
+    'contents',                    # 06. API - 05. 로그인 테스트 해볼 수 있는 페이지 만들기
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'fastgram.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
