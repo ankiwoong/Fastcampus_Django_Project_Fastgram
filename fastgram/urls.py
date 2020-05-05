@@ -27,5 +27,5 @@ urlpatterns = [
     # 06. API - 05. 로그인 테스트 해볼 수 있는 페이지 만들기
     path('login_test', HomeView.as_view(), name='contents_home'),
     # 08. API - 07. 로그인 페이지 분리
-    path('login/', TemplateView.as_view(template_name='login.html', name='login')),
+    path('login/', TemplateView.as_view(template_name='login.html'), name='login'),
 ]

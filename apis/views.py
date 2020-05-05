@@ -16,14 +16,14 @@ class BaseView(View):
             'data': data,
             'message': message,
         }
-        return JsonResponse(result, status)
+        return JsonResponse(result, status=status)
 
 
 # 04. API - 02. User API 만들기
 class UserCreateView(BaseView):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
-        return super(UserCreateView, self).dispatch(request, *args, **kwargs)
+        return super(UserCreateView, self).dispatch(request, *args, **kwagrs)
 
     def post(self, request):
         username = request.POST.get('username', '')
@@ -45,7 +45,7 @@ class UserCreateView(BaseView):
         # 05. API - 03. 예외처리와 아이디, 이메일 등 검증하는 로직 만들기
         try:
             user = User.objects.create_user(username, email, password)
-        except IntIegrityError:
+        except IntegrityError:
             return self.response(message='이미 존재하는 아이디입니다.', status=400)
 
         return self.response({'user.id': user.id})
