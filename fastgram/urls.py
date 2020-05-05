@@ -24,5 +24,5 @@ urlpatterns = [
     # 05. API - 03. 예외처리와 아이디, 이메일 등 검증하는 로직 만들기
     path('apis/', include('apis.urls')),
     # 06. API - 05. 로그인 테스트 해볼 수 있는 페이지 만들기
-    path('login_test/', HomeView.as_view(), name='contents_home'),
+    path('login_test', HomeView.as_view(), name='contents_home'),
 ]
