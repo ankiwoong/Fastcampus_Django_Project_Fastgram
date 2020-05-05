@@ -15,7 +15,7 @@ class BaseView(View):
 
 # 04. API - 02. User API 만들기
 class UserCreateView(Baseview):
-    @method-decorator(csrf_exempt)
+    @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super(UserCreateView, self).dispatch(request, *args, **kwargs)
 
